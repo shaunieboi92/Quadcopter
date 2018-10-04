@@ -1,0 +1,24 @@
+// Defines Tirg and Echo pins of the Ultrasonic Sensor
+const int trigPin = 10;
+const int echoPin = 11;
+// Variables for the duration and the distance
+long duration;
+int distance;
+void setup() {
+  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+  Serial.begin(9600);//show input results on serial monitor
+}
+void loop() {
+  digitalWrite(trigPin, LOW); 
+  delayMicroseconds(2);
+  // Sets the trigPin on HIGH state for 10 micro seconds
+  digitalWrite(trigPin, HIGH); 
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH); // Reads the echoPin, returns the sound wave travel time in microseconds
+  distance= duration*0.034/2;//in cm//In SI units the speed of sound in air at 20°C and 60% relative humidity is approximately 344 meters per second, hence 344*10^-6 m per microsecond
+
+ Serial.print("Distance: ");
+ Serial.println(distance);
+}
